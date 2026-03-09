@@ -36,7 +36,7 @@ const LivePreview = () => {
         </html>
       `;
 
-            const response = await axios.post('http://localhost:5000/api/biodata/download-direct',
+            const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/biodata/download-direct`,
                 { htmlContent, isWatermarked: user?.role === 'guest' },
                 { responseType: 'blob' }
             );

@@ -29,7 +29,7 @@ const Dashboard = () => {
         }
         if (window.confirm(t('confirm_delete') || 'Are you sure you want to delete this biodata?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/biodata/${id}`, {
+                await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/biodata/${id}`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 setBiodatas(prev => prev.filter(b => b._id !== id));
@@ -43,7 +43,7 @@ const Dashboard = () => {
         if (!user) navigate('/login');
         const fetchBiodatas = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/biodata', {
+                const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/biodata`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 setBiodatas(data);
