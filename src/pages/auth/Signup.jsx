@@ -16,6 +16,9 @@ const Signup = () => {
         if (success) navigate('/create');
     };
 
+    const api = import.meta.env.VITE_API_URL || 'https://shaadi-backend-6f17.onrender.com/api'
+
+    console.log(api)
     return (
         <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-6 bg-gray-50">
             <motion.div

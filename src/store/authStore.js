@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
-const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'https://shaadi-backend-6f17.onrender.com/api' });
-console.log(api)
+const api = import.meta.env.VITE_API_URL || 'https://shaadi-backend-6f17.onrender.com/api'
+
 export const useAuthStore = create((set) => ({
     user: JSON.parse(localStorage.getItem('user')) || null,
     loading: false,
@@ -12,7 +12,7 @@ export const useAuthStore = create((set) => ({
     login: async (email, password) => {
         set({ loading: true, error: null });
         try {
-            const { data } = await api.post('/auth/login', { email, password });
+            const { data } = await axios.post(`${api}/auth/login`, { email, password });
             localStorage.setItem('user', JSON.stringify(data));
             set({ user: data, loading: false });
             return true;
@@ -25,7 +25,7 @@ export const useAuthStore = create((set) => ({
     register: async (userData) => {
         set({ loading: true, error: null });
         try {
-            const { data } = await api.post('/auth/register', userData);
+            const { data } = await axios.post(`${api}/auth/register`, userData);
             localStorage.setItem('user', JSON.stringify(data));
             set({ user: data, loading: false });
             return true;
@@ -38,7 +38,7 @@ export const useAuthStore = create((set) => ({
     continueAsGuest: async () => {
         set({ loading: true, error: null });
         try {
-            const { data } = await api.post('/auth/guest');
+            const { data } = await axios.post(`${api}/auth/guest`);
             localStorage.setItem('user', JSON.stringify(data));
             set({ user: data, loading: false });
             return true;

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
-const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'https://shaadi-backend-6f17.onrender.com/api' });
+const api = import.meta.env.VITE_API_URL || 'https://shaadi-backend-6f17.onrender.com/api'
 
 const initialFormState = {
     personalDetails: {
@@ -98,7 +98,7 @@ export const useBiodataStore = create((set, get) => ({
     saveBiodata: async (token) => {
         set({ isSaving: true, error: null });
         try {
-            const { data } = await api.post('/biodata', get().formData, {
+            const { data } = await axios.post(`${api}/biodata`, get().formData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             set({ isSaving: false });
