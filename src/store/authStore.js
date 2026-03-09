@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
-const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api' });
-
+const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'https://shaadi-backend-6f17.onrender.com/api' });
+console.log(api)
 export const useAuthStore = create((set) => ({
     user: JSON.parse(localStorage.getItem('user')) || null,
     loading: false,
     error: null,
+
 
     login: async (email, password) => {
         set({ loading: true, error: null });
